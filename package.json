@@ -1,0 +1,24 @@
+{
+  "name": "gitcleanup",
+  "version": "1.0.0",
+  "description": "A CLI utility to create a local backup of all the private repos in GitHub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Pranay Ankit Tiru",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^15.11.2",
+    "axios": "^0.18.0",
+    "chalk": "^2.4.1",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "configstore": "^4.0.0",
+    "figlet": "^1.2.0",
+    "inquirer": "^6.2.0",
+    "lodash": "^4.17.11",
+    "simple-git": "^1.96.0"
+  }
+}
