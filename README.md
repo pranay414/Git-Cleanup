@@ -7,6 +7,6 @@ This utility will help me to backup my private Github repos locally before delet
 ## How to run locally
 This package(github-scaffold) is not published on npm. If you want to try then follow these steps:
 
-* Clone this repository using git clone https://github.com/pranay414/github-scaffold.git
+* Clone this repository using git clone https://github.com/pranay414/Git-Cleanup.git
 * Install the dependencies using npm install
 * Run npm install -g, to make it globally accessible
