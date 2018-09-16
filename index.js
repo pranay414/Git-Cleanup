@@ -21,23 +21,36 @@ console.log(
 // Ask for user's Github credentials
 const run = async () => {
     let token = github.getStoredGithubToken()
-
+    let owner_name = github.getStoredUserName()
+    
     if (!token) {
         await github.setGithubCredentials()
         token = await github.regsiterNewToken()
+        owner_name = github.getStoredUserName()
     }
 
     status.start();
-    let userResponse = await repo.getPrivateRepos(token)
+    let repos = await repo.getPrivateRepos(token)
 
-    if (userResponse === null) {
+    if (repos === null) {
         console.log(chalk.red(`No private repos found!`))
     }
     else {
         status.stop();
         let action = await inquirer.askUserActions();
         if (action.option === 'Clone and delete all the private repos') {
-            repo.cloneAndDelete(userResponse);
+            repo.cloneAndDelete(repos);
+        }
+        else if(action.option === 'Delete all the private repos without cloning') {
+            console.log('Deleting')
+            repo.delete(owner_name, repos);
+        }
+        else if(action.option === 'Make all private repos public') {
+            console.log('making them public')
+            repo.public(owner_name, repos);
+        }
+        else if(action.option === 'Make selected private repos public') {
+            console.log('making selected public')
         }
     }
 }
