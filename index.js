@@ -41,12 +41,11 @@ const run = async () => {
         if (action.option === 'Clone and delete all the private repos') {
             repo.cloneAndDelete(repos, token);
         }
+        // Extremely dangerous, use with caution!
         else if(action.option === 'Delete all the private repos without cloning') {
-            console.log('Deleting')
             repo.delete(owner_name, repos, token);
         }
         else if(action.option === 'Make all private repos public') {
-            console.log('making them public')
             repo.public(owner_name, repos, token);
         }
         else if(action.option === 'Make selected private repos public') {
