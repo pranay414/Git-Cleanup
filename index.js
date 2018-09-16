@@ -23,7 +23,7 @@ console.log(
 const run = async () => {
     let token = github.getStoredGithubToken()
     let owner_name = github.getStoredUserName()
-    
+
     if (!token) {
         await github.setGithubCredentials()
         token = await github.regsiterNewToken()
@@ -38,20 +38,25 @@ const run = async () => {
     }
     else {
         status.stop();
-        let action = await inquirer.askUserActions();
-        if (action.option === 'Clone and delete all the private repos') {
-            repo.cloneAndDelete(repos, token);
+        while (1) {
+            let action = await inquirer.askUserActions();
+            if (action.option === 'Clone and delete all the private repos') {
+                repo.cloneAndDelete(repos, token);
+            }
+            // Extremely dangerous, use with caution!
+            else if (action.option === 'Delete all the private repos without cloning') {
+                repo.delete(owner_name, repos, token);
+            }
+            else if (action.option === 'Make all private repos public') {
+                repo.public(owner_name, repos, token);
+            }
+            else if (action.option === 'Quit') {
+                process.exit();
+            }
         }
-        // Extremely dangerous, use with caution!
-        else if(action.option === 'Delete all the private repos without cloning') {
-            repo.delete(owner_name, repos, token);
-        }
-        else if(action.option === 'Make all private repos public') {
-            repo.public(owner_name, repos, token);
-        }
-        else if(action.option === 'Make selected private repos public') {
+        /* else if(action.option === 'Make selected private repos public') {
             console.log('making selected public')
-        }
+        } */
     }
 }
 
