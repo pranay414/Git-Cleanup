@@ -39,15 +39,15 @@ const run = async () => {
         status.stop();
         let action = await inquirer.askUserActions();
         if (action.option === 'Clone and delete all the private repos') {
-            repo.cloneAndDelete(repos);
+            repo.cloneAndDelete(repos, token);
         }
         else if(action.option === 'Delete all the private repos without cloning') {
             console.log('Deleting')
-            repo.delete(owner_name, repos);
+            repo.delete(owner_name, repos, token);
         }
         else if(action.option === 'Make all private repos public') {
             console.log('making them public')
-            repo.public(owner_name, repos);
+            repo.public(owner_name, repos, token);
         }
         else if(action.option === 'Make selected private repos public') {
             console.log('making selected public')
